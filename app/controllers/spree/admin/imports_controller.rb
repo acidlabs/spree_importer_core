@@ -15,7 +15,7 @@ module Spree
       def template
         file = File.open(@importer.sample_file)
 
-        send_data file.read, :filename => File.basename(@importer.sample_file)
+        send_data file.read, filename: File.basename(@importer.sample_file)
       end
 
       # GET /admin/importers/:importer_id/imports/new
@@ -30,7 +30,7 @@ module Spree
         end
 
         def set_importer
-          @importer = Spree::ImporterCore::Config.importers.select{|importer| importer.key.to_s == params[:importer_id].to_s}.first
+          @importer = Spree::ImporterCore::Config.importers.select { |importer| importer.key.to_s == params[:importer_id].to_s }.first
         end
 
       protected

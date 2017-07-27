@@ -11,26 +11,26 @@ class Spree::Import < ActiveRecord::Base
   validates_attachment_content_type :document, content_type: ALLOWED_FILE_FORMATS
   # do_not_validate_attachment_file_type :document
 
-  state_machine :initial => :created do
+  state_machine initial: :created do
     event :process do
-      transition :created => :processing
+      transition created: :processing
     end
 
     event :complete do
-      transition :processing => :completed
+      transition processing: :completed
     end
 
     event :failure do
-      transition :processing => :failed
+      transition processing: :failed
     end
 
     event :stop do
-      transition :created => :stopped
+      transition created: :stopped
     end
 
     event :retry do
-      transition :failed  => :processing, if: lambda {|import| !import.failed? }
-      transition :stopped => :processing, if: lambda {|import| !import.stopped?}
+      transition failed: :processing, if: lambda { |import| !import.failed? }
+      transition stopped: :processing, if: lambda { |import| !import.stopped? }
     end
 
     after_transition to: :processing do  |import, transition|
@@ -44,16 +44,16 @@ class Spree::Import < ActiveRecord::Base
 
   def status_icon
     case state
-    when 'created' then return ''
-    when 'processing' then return 'glyphicon-refresh gly-spin'
-    when 'completed' then return 'glyphicon-ok'
-    when 'failed' then return 'glyphicon-alert'
-    when 'stopped' then return 'glyphicon-stop'
-    else return ''
+    when "created" then return ""
+    when "processing" then return "glyphicon-refresh gly-spin"
+    when "completed" then return "glyphicon-ok"
+    when "failed" then return "glyphicon-alert"
+    when "stopped" then return "glyphicon-stop"
+    else return ""
     end
   end
 
   def importer_class
-    Spree::ImporterCore::Config.importers.select{|i| i.key.to_s == self.importer.to_s}.first
+    Spree::ImporterCore::Config.importers.select { |i| i.key.to_s == self.importer.to_s }.first
   end
 end
