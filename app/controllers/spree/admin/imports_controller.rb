@@ -1,9 +1,9 @@
 module Spree
   module Admin
     class ImportsController < Spree::Admin::ResourceController
-      before_filter :set_importer
+      before_action :set_importer
 
-      after_filter :perform_import, only: :create
+      after_action :perform_import, only: :create
 
       # GET /admin/importers/:importer/imports
       def index
