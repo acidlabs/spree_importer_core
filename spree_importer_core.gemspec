@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = '1.0.0'
   s.summary     = 'Import engine for Spree backend'
   s.description = 'Enables a easily way for massive load of different Spree models, depending as you need'
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.2.7'
 
   s.author    = 'Marcelo Espina'
   s.email     = 'mespina.icc@gmail.com'
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 3.0.0'
+  s.add_dependency 'spree_core', '~> 3.3.0.rc1'
 
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'coffee-rails'
