@@ -1,4 +1,4 @@
-class CreateSpreeImports < ActiveRecord::Migration
+class CreateSpreeImports < ActiveRecord::Migration[4.2]
   def change
     create_table :spree_imports do |t|
       t.attachment :document
